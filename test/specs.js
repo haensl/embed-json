@@ -172,5 +172,186 @@ describe('embed-json', () => {
         });
       });
     });
+
+    describe('root', () => {
+      let output;
+
+      describe('string', () => {
+        describe('valid path', () => {
+          beforeEach((done) => {
+            fixture('opt-root.html')
+              .then((html) => {
+                output = embedJson(html, {
+                  root: './test/fixtures'
+                });
+                done();
+              })
+          });
+
+          it('searches for the json file in the given folder', () => {
+            expect(/{"foo":"bar"}/.test(output)).to.be.true;
+          });
+        });
+
+        describe('invalid path', () => {
+          let error;
+          
+          beforeEach((done) => {
+            fixture('opt-root.html')
+              .then((html) => {
+                try {
+                  embedJson(html, {
+                    root: './test/does-not-exist'
+                  });
+                } catch (err) {
+                  error = err;
+                } finally {
+                  done();
+                }
+              });
+          });
+
+          it('emits an invalid option error', () => {
+            expect(/invalid option: root/i.test(error.message)).to.be.true;
+          });
+        });
+      });
+
+      describe('non string', () => {
+        let error;
+        
+        beforeEach((done) => {
+          fixture('opt-root.html')
+            .then((html) => {
+              try {
+                embedJson(html, {
+                  root: {
+                    foo: 'bar'
+                  }
+                });
+              } catch(err) {
+                error = err;
+              } finally {
+                done();
+              }
+            });
+        });
+
+        it('emits an invalid option error', () => {
+          expect(/invalid option: root/i.test(error.message)).to.be.true;
+        });
+      });
+    });
+
+    describe('minify', () => {
+      describe('boolean', () => {
+        let output;
+        describe('true', () => {
+          beforeEach((done) => {
+            fixture('json.html')
+              .then((html) => {
+                output = embedJson(html, {
+                  minify: true
+                })
+                done();
+              });
+          });
+
+          it('minifies the json data', () => {
+            expect(/{"foo":"bar"}/.test(output)).to.be.true;
+          });
+        });
+
+        describe('false', () => {
+          beforeEach((done) => {
+            fixture('json.html')
+              .then((html) => {
+                output = embedJson(html, {
+                  minify: false
+                });
+                done();
+              });
+          });
+
+          it('does not minify the json data', () => {
+            expect(/{ "foo": "bar" }/.test(output)).to.be.true;
+          });
+        });
+      });
+
+      describe('non-boolean', () => {
+        let error;
+      
+        beforeEach((done) => {
+          fixture('json.html')
+            .then((html) => {
+              try {
+                embedJson(html, {
+                  minify: {
+                    foo: 'bar'
+                  }
+                });
+              } catch (err) {
+                error = err;
+              } finally {
+                done();
+              }
+            });
+        });
+
+        it('emits an invalid option error', () => {
+          expect(/invalid option: minify/i.test(error.message)).to.be.true;
+        });
+      });
+    });
+
+    describe('encoding', () => {
+      describe('string', () => {
+        let output;
+
+        beforeEach((done) => {
+          fixture('opt-encoding.html')
+            .then((html) => {
+              output = embedJson(html, {
+                encoding: 'ascii'
+              });
+              done();
+            });
+        });
+
+        it('inserts the JSON data into the script tag', () => {
+          expect(/"foo":"bar"/.test(output)).to.be.true;
+        });
+
+        it('removes the src attribute', () => {
+          expect(/src=/.test(output)).to.be.false;
+        });
+      });
+
+      describe('non string', () => {
+        let error;
+
+        beforeEach((done) => {
+          fixture('json.html')
+            .then((html) => {
+              try {
+                embedJson(html, {
+                  encoding: {
+                    foo: 'bar'
+                  }
+                });
+              } catch (err) {
+                error = err;
+              } finally {
+                done();
+              }
+            });
+        });
+
+        it('emits an invalid option error', () => {
+          expect(/invalid option: encoding/i.test(error.message)).to.be.true;
+        });
+      });
+    });
   });
 });

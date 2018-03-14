@@ -1,7 +1,16 @@
 {
-  "name": "y",
+  "name": "embed-json",
   "version": "1.0.0",
-  "description": "Embed JSON data from files into HTML.",
+  "engines": {
+    "node": ">=6"
+  },
+  "description": "Inline/Embed JSON data from files into HTML.",
+  "keywords": [
+    "inline",
+    "embed",
+    "json",
+    "html"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -11,7 +20,11 @@
     "type": "git",
     "url": "git+https://github.com/haensl/emed-json.git"
   },
-  "author": "HP Dietz",
+  "author": {
+    "name": "HP Dietz",
+    "email": "h.p.dietz@gmail.com",
+    "twitter": "@h_p_d"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/haensl/emed-json/issues"
