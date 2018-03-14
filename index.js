@@ -4,11 +4,15 @@ const defaults = {
   encoding: 'utf8',
   mimeTypes: [
     'application/json',
-    'application/ld\\+json'
+    'application/ld+json'
   ],
   minify: true,
   root: __dirname
 };
+
+const regexEscape = (str) =>
+  str.replace(/([\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/,
+    (match, specialChar) => `\\${specialChar}`);
 
 module.exports = (html, opts = {}) => {
   if (typeof html !== 'string') {
@@ -45,7 +49,7 @@ module.exports = (html, opts = {}) => {
   }
 
   const regex = new RegExp(`<script(.*)type="(${
-    options.mimeTypes.map((mimeType) => `${mimeType}`)
+    options.mimeTypes.map((mimeType) => `${regexEscape(mimeType)}`)
       .join('|')
     })"(.*)src="(.+\.json)"(.*)>(.*)</script>`, 'gm');
 
