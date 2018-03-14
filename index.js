@@ -56,7 +56,7 @@ module.exports = (html, opts = {}) => {
         && fs.statSync(absSrc).isFile()) {
         try {
           const jsonData = fs.readFileSync(absSrc, options.encoding);
-          return `<script${preType}type="${type}"${postType}${postSrc}>${options.minify ? JSON.stringify(JSON.parse(jsonData)) : jsonData}</script>`;
+          return `<script${preType}type="${type}"${postType !== ' ' ? postType : ''}${postSrc}>${options.minify ? JSON.stringify(JSON.parse(jsonData)) : jsonData}</script>`;
         } catch (err) {
           throw err;
         }

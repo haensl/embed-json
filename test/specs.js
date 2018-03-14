@@ -100,4 +100,77 @@ describe('embed-json', () => {
       expect(/invalid source/i.test(error.message)).to.be.true;
     });
   });
+
+  describe('options', () => {
+    describe('mimeTypes', () => {
+      let output;
+
+      describe('Array<string>', () => {
+        beforeEach((done) => {
+          fixture('opt-mime.html')
+            .then((html) => {
+              output = embedJson(html, {
+                mimeTypes: [
+                  'foo/bar'
+                ]
+              });
+              done();
+            });
+        });
+
+        it('processes scripts with the given mime type', () => {
+          expect(/type="foo\/bar">{"foo":"bar"}/.test(output)).to.be.true;
+        });
+
+        it('does not process scripts with different mime type', () => {
+          expect(/type="application\/json" src="/.test(output)).to.be.true;
+        });
+      });
+
+      describe('string', () => {
+        beforeEach((done) => {
+          fixture('opt-mime.html')
+            .then((html) => {
+              output = embedJson(html, {
+                mimeTypes: 'foo/bar'
+              });
+              done();
+            });
+        });
+
+        it('processes scripts with the given mime type', () => {
+          expect(/type="foo\/bar">{"foo":"bar"}/.test(output)).to.be.true;
+        });
+
+        it('does not process scripts with different mime type', () => {
+          expect(/type="application\/json" src="/.test(output)).to.be.true;
+        });
+      });
+
+      describe('non string or Array<string>', () => {
+        let error;
+
+        beforeEach((done) => {
+          fixture('opt-mime.html')
+            .then((html) => {
+              try {
+                embedJson(html, {
+                  mimeTypes: {
+                    foo: 'bar'
+                  }
+                });
+              } catch (err) {
+                error = err;
+              } finally {
+                done();
+              }
+            });
+        });
+
+        it('throws an invalid option error', () => {
+          expect(/invalid option: mimeTypes/i.test(error.message)).to.be.true;
+        });
+      });
+    });
+  });
 });
