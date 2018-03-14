@@ -54,8 +54,6 @@ Specify the encoding of the JSON files.
 
 Specify the mime type(s) of scripts to embed.
 
-**Attention:** If the mime type strings contain regex-sensitive characters, those must be double escaped, e.g. `application/ld\\+json`.
-
 ### minify `boolean`
 
 **Default:** `true`
