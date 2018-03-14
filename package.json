@@ -1,0 +1,24 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Embed JSON data from files into HTML.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "tdd": "mocha --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haensl/emed-json.git"
+  },
+  "author": "HP Dietz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haensl/emed-json/issues"
+  },
+  "homepage": "https://github.com/haensl/emed-json#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.4"
+  }
+}
