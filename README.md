@@ -1,4 +1,4 @@
-# emed-json
+# embed-json
 Node.js module to inline/embed JSON data from files into html.
 
 [![NPM](https://nodei.co/npm/embed-json.png?downloads=true)](https://nodei.co/npm/embed-json/)
