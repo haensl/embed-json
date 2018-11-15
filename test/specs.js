@@ -18,7 +18,7 @@ const fixture = (name) =>
 describe('embed-json', () => {
   describe('script with src attribute', () => {
     let output;
-    
+
     describe('and mime type application/json', () => {
       beforeEach((done) => {
         fixture('json.html')
@@ -185,7 +185,7 @@ describe('embed-json', () => {
                   root: './test/fixtures'
                 });
                 done();
-              })
+              });
           });
 
           it('searches for the json file in the given folder', () => {
@@ -195,7 +195,7 @@ describe('embed-json', () => {
 
         describe('invalid path', () => {
           let error;
-          
+
           beforeEach((done) => {
             fixture('opt-root.html')
               .then((html) => {
@@ -219,7 +219,7 @@ describe('embed-json', () => {
 
       describe('non string', () => {
         let error;
-        
+
         beforeEach((done) => {
           fixture('opt-root.html')
             .then((html) => {
@@ -252,7 +252,7 @@ describe('embed-json', () => {
               .then((html) => {
                 output = embedJson(html, {
                   minify: true
-                })
+                });
                 done();
               });
           });
@@ -281,7 +281,7 @@ describe('embed-json', () => {
 
       describe('non-boolean', () => {
         let error;
-      
+
         beforeEach((done) => {
           fixture('json.html')
             .then((html) => {
