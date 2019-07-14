@@ -1,3 +1,6 @@
+## 1.1.3
+* [#10: Update dependencies.](https://github.com/haensl/emed-json/issues/10)
+
 ## 1.1.2
 * [#8: Integrate CD.](https://github.com/haensl/emed-json/issues/8)
 * [#7: Update dependencies.](https://github.com/haensl/emed-json/issues/7)
