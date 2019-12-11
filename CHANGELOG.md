@@ -1,3 +1,6 @@
+## 1.1.5
+* [#13: Update dependencies.](https://github.com/haensl/embed-json/issues/13)
+
 ## 1.1.4
 * [Fix lodash security alert.](https://github.com/haensl/embed-json/network/alert/package-lock.json/lodash/open)
 
