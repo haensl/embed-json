@@ -37,7 +37,7 @@ const embedJson = require('embed-json');
 const fs = require('fs');
 
 const html = fs.readFileSync('index.html', 'utf8');
-embedJson(html);
+const htmlWithEmbeddedJSON = embedJson(html);
 ```
 
 ### Options
@@ -46,7 +46,7 @@ embedJson(html);
 
 **Default:** `utf8`
 
-Specify the encoding of the JSON files.
+Specify the [encoding](https://stackoverflow.com/a/14551669/5061949) of the JSON files.
 
 ### mimeTypes `Array<string> | string`
 
@@ -64,7 +64,7 @@ Specify whether or not to minify the embedded JSON data.
 
 **Default:** `__dirname`
 
-Specify the directory in which the JSON files are stored.
+Specify the root directory from which to resolve relative `src`s.
 
 ### [Changelog](CHANGELOG.md)
 
