@@ -1,3 +1,6 @@
+## 1.1.6
+* [#15: Update dependencies.](https://github.com/haensl/embed-json/issues/15)
+
 ## 1.1.5
 * [#13: Update dependencies.](https://github.com/haensl/embed-json/issues/13)
 
