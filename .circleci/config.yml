@@ -212,7 +212,7 @@ jobs:
 
   bundle-test-min:
     docker:
-      - image: circleci/node:7.6
+      - image: circleci/node:9.0.0
     steps:
       - init
       - attach_workspace:
