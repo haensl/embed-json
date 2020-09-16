@@ -62,7 +62,7 @@ Specify whether or not to minify the embedded JSON data.
 
 ### root `string`
 
-**Default:** `__dirname`
+**Default:** [`path.dirname(require.main.filename)`](https://stackoverflow.com/a/18721515/5061949) _(i.e. a best guess at the project root.)_
 
 Specify the root directory from which to resolve relative `src`s.
 

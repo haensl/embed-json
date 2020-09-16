@@ -1,8 +1,9 @@
-const join = require('path').join;
+const { join, resolve } = require('path');
 const fs = require('fs');
 const expect = require('chai').expect;
 const embedJson = require('../');
 const fixturesPath = join(__dirname, 'fixtures');
+const appRoot = resolve(join(__dirname, '..'));
 
 const fixture = (name) =>
   new Promise((resolve, reject) => {
@@ -23,7 +24,9 @@ describe('embed-json', () => {
       beforeEach((done) => {
         fixture('json.html')
           .then((html) => {
-            output = embedJson(html);
+            output = embedJson(html, {
+              root: appRoot
+            });
             done();
           });
       });
@@ -41,7 +44,9 @@ describe('embed-json', () => {
       beforeEach((done) => {
         fixture('ld+json.html')
           .then((html) => {
-            output = embedJson(html);
+            output = embedJson(html, {
+              root: appRoot
+            });
             done();
           });
       });
@@ -64,7 +69,9 @@ describe('embed-json', () => {
       fixture('no-script.html')
         .then((html) => {
           input = html;
-          output = embedJson(html);
+          output = embedJson(html, {
+            root: appRoot
+          });
           done();
         });
     });
@@ -87,7 +94,9 @@ describe('embed-json', () => {
       fixture('nonexistent-src.html')
         .then((html) => {
           try {
-            embedJson(html);
+            embedJson(html, {
+              root: appRoot
+            });
           } catch (err) {
             error = err;
           } finally {
@@ -110,6 +119,7 @@ describe('embed-json', () => {
           fixture('opt-mime.html')
             .then((html) => {
               output = embedJson(html, {
+                root: appRoot,
                 mimeTypes: [
                   'foo/bar'
                 ]
@@ -132,6 +142,7 @@ describe('embed-json', () => {
           fixture('opt-mime.html')
             .then((html) => {
               output = embedJson(html, {
+                root: appRoot,
                 mimeTypes: 'foo/bar'
               });
               done();
@@ -155,6 +166,7 @@ describe('embed-json', () => {
             .then((html) => {
               try {
                 embedJson(html, {
+                  root: appRoot,
                   mimeTypes: {
                     foo: 'bar'
                   }
@@ -251,6 +263,7 @@ describe('embed-json', () => {
             fixture('json.html')
               .then((html) => {
                 output = embedJson(html, {
+                  root: appRoot,
                   minify: true
                 });
                 done();
@@ -267,6 +280,7 @@ describe('embed-json', () => {
             fixture('json.html')
               .then((html) => {
                 output = embedJson(html, {
+                  root: appRoot,
                   minify: false
                 });
                 done();
@@ -287,6 +301,7 @@ describe('embed-json', () => {
             .then((html) => {
               try {
                 embedJson(html, {
+                  root: appRoot,
                   minify: {
                     foo: 'bar'
                   }
@@ -313,6 +328,7 @@ describe('embed-json', () => {
           fixture('opt-encoding.html')
             .then((html) => {
               output = embedJson(html, {
+                root: appRoot,
                 encoding: 'ascii'
               });
               done();
@@ -336,6 +352,7 @@ describe('embed-json', () => {
             .then((html) => {
               try {
                 embedJson(html, {
+                  root: appRoot,
                   encoding: {
                     foo: 'bar'
                   }

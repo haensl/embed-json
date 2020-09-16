@@ -7,7 +7,7 @@ const defaults = {
     'application/ld+json'
   ],
   minify: true,
-  root: __dirname
+  root: path.dirname(require.main.filename)
 };
 
 const regexEscape = (str) =>
@@ -15,8 +15,6 @@ const regexEscape = (str) =>
     /([\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/,
     (match, specialChar) => `\\${specialChar}`
   );
-
-console.info(path.dirname(require.main.filename));
 
 module.exports = (html, opts = {}) => {
   if (typeof html !== 'string') {
@@ -73,7 +71,7 @@ module.exports = (html, opts = {}) => {
         const jsonData = fs.readFileSync(absSrc, options.encoding);
         return `<script${preType}type="${type}"${postType !== ' ' ? postType : ''}${postSrc}>${options.minify ? JSON.stringify(JSON.parse(jsonData)) : jsonData}</script>`;
       } else {
-        throw new Error(`Invalid source path: ${src}`);
+        throw new Error(`Invalid source path: ${src}\noptions.root set to ${options.root}\nResulting absolute path: ${absSrc}`);
       }
     }
   );
