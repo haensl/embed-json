@@ -190,6 +190,10 @@ jobs:
           name: copy package test
           working_directory: /tmp/test-app
           command: |
+            ls -la
+            pwd
+            ls -la ~
+            ls -la ~/embed-json
             cp -r ~/embed-json/package-test/* .
       - run:
           name: create test results directory
