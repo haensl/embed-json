@@ -3,8 +3,9 @@ Node.js module to inline/embed JSON data from files into html.
 
 [![NPM](https://nodei.co/npm/embed-json.png?downloads=true)](https://nodei.co/npm/embed-json/)
 
-[![Build Status](https://travis-ci.org/haensl/embed-json.svg?branch=master)](https://travis-ci.org/haensl/embed-json)
+[![npm version](https://badge.fury.io/js/embed-json.svg)](http://badge.fury.io/js/embed-json)
 
+[![CircleCI](https://circleci.com/gh/haensl/embed-json.svg?style=svg)](https://circleci.com/gh/haensl/embed-json)
 
 ## Installation
 

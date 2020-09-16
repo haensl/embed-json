@@ -1,5 +1,6 @@
-.*
 test/
 package-test/
 test-results/
+.*
 *.md
+*.tgz
