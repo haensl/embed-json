@@ -100,6 +100,9 @@ workflows:
       - bundle-test-min:
           requires:
             - bundle
+      - bundle-test-latest:
+          requires:
+            - bundle
       - ensure-versioned-correctly:
           requires:
             - bundle
@@ -108,6 +111,7 @@ workflows:
             - ensure-versioned-correctly
             - bundle-test-lts
             - bundle-test-min
+            - bundle-test-latest
           filters:
             branches:
               only: master
@@ -182,7 +186,6 @@ jobs:
     docker:
       - image: circleci/node:lts
     steps:
-      - init
       - attach_workspace:
           at: ~/embed-json
       - create-test-project
@@ -213,6 +216,37 @@ jobs:
   bundle-test-min:
     docker:
       - image: circleci/node:9.0.0
+    steps:
+      - attach_workspace:
+          at: ~/embed-json
+      - create-test-project
+      - run:
+          name: install module
+          working_directory: /tmp/test-app
+          command: |
+            npm i -S ~/embed-json/embed-json.tgz
+      - run:
+          name: copy package test
+          working_directory: /tmp/test-app
+          command: |
+            cp -r ~/embed-json/package-test/* .
+      - run:
+          name: create test results directory
+          working_directory: /tmp/test-app
+          command: |
+            mkdir -p test-results/package
+      - run:
+          name: test embedding
+          working_directory: /tmp/test-app
+          command: |
+            node embed-json.test.js
+      - store_artifacts:
+          path: /tmp/test-app/test-results
+      - package-information
+
+  bundle-test-latest:
+    docker:
+      - image: circleci/node:latest
     steps:
       - init
       - attach_workspace:
