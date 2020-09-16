@@ -39,6 +39,10 @@ const fs = require('fs');
 
 const html = fs.readFileSync('index.html', 'utf8');
 const htmlWithEmbeddedJSON = embedJson(html);
+// script tags with src attribute in index.html
+// <script type="application/json" src="data.json"></script>
+// are transformed to
+// <script type="application/json">{dataThat:'was in data.json'}</script>
 ```
 
 ### Options
