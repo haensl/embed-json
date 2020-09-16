@@ -16,6 +16,8 @@ const regexEscape = (str) =>
     (match, specialChar) => `\\${specialChar}`
   );
 
+console.info(path.dirname(require.main.filename));
+
 module.exports = (html, opts = {}) => {
   if (typeof html !== 'string') {
     throw new TypeError('Invalid parameter: html must be string');
@@ -71,7 +73,7 @@ module.exports = (html, opts = {}) => {
         const jsonData = fs.readFileSync(absSrc, options.encoding);
         return `<script${preType}type="${type}"${postType !== ' ' ? postType : ''}${postSrc}>${options.minify ? JSON.stringify(JSON.parse(jsonData)) : jsonData}</script>`;
       } else {
-        throw new Error('Invalid source path: ${src}');
+        throw new Error(`Invalid source path: ${src}`);
       }
     }
   );
