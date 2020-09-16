@@ -115,7 +115,13 @@ workflows:
           filters:
             branches:
               only: master
-      - package-test:
+      - package-test-lts:
+          requires:
+            - publish
+      - package-test-latest:
+          requires:
+            - publish
+      - package-test-min:
           requires:
             - publish
       - publish-github-release:
@@ -188,6 +194,11 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing bundle on Node.js LTS"
+            node --version
       - create-test-project
       - run:
           name: install module
@@ -219,6 +230,11 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing bundle on minimum required Node.js version"
+            node --version
       - create-test-project
       - run:
           name: install module
@@ -251,6 +267,11 @@ jobs:
       - init
       - attach_workspace:
           at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing bundle on latest Node.js version"
+            node --version
       - create-test-project
       - run:
           name: install module
@@ -322,13 +343,90 @@ jobs:
           name: publish node module
           command: npm publish --access public
 
-  package-test:
+  package-test-latest:
     docker:
-      - image: circleci/node:lts
+      - image: circleci/node:latest
     steps:
       - init
       - attach_workspace:
           at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing package on Node.js latest"
+            node --version
+      - create-test-project
+      - run:
+          name: install module
+          working_directory: /tmp/test-app
+          command: |
+            npm i -S embed-json
+      - run:
+          name: copy package test
+          working_directory: /tmp/test-app
+          command: |
+            cp -r ~/embed-json/package-test/* .
+      - run:
+          name: create test results directory
+          working_directory: /tmp/test-app
+          command: |
+            mkdir -p test-results/package
+      - run:
+          name: test embedding
+          working_directory: /tmp/test-app
+          command: |
+            node embed-json.test.js
+      - store_artifacts:
+          path: /tmp/test-app/test-results
+      - package-information
+
+  package-test-min:
+    docker:
+      - image: circleci/node:9.0.0
+    steps:
+      - attach_workspace:
+          at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing package on minium required Node.js version"
+            node --version
+      - create-test-project
+      - run:
+          name: install module
+          working_directory: /tmp/test-app
+          command: |
+            npm i -S embed-json
+      - run:
+          name: copy package test
+          working_directory: /tmp/test-app
+          command: |
+            cp -r ~/embed-json/package-test/* .
+      - run:
+          name: create test results directory
+          working_directory: /tmp/test-app
+          command: |
+            mkdir -p test-results/package
+      - run:
+          name: test embedding
+          working_directory: /tmp/test-app
+          command: |
+            node embed-json.test.js
+      - store_artifacts:
+          path: /tmp/test-app/test-results
+      - package-information
+
+  package-test-lts:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: ~/embed-json
+      - run:
+          name: node info
+          command: |
+            echo "Testing package on Node.js LTS"
+            node --version
       - create-test-project
       - run:
           name: install module
