@@ -106,7 +106,8 @@ workflows:
       - publish:
           requires:
             - ensure-versioned-correctly
-            - bundle-test
+            - bundle-test-lts
+            - bundle-test-min
           filters:
             branches:
               only: master
