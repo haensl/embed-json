@@ -1,3 +1,6 @@
+## 1.2.1
+* [#19: Update dependencies.](https://github.com/haensl/embed-json/issues/19)
+
 ## 1.2.0
 * [#16: Migrate to CircleCI.](https://github.com/haensl/embed-json/issues/16)
 * Lift minimum required Node.js version to 9.0.0
