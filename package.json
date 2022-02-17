@@ -1,6 +1,6 @@
 {
   "name": "embed-json",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "engines": {
     "node": ">=9.0.0"
   },
@@ -30,6 +30,7 @@
     "twitter": "@h_p_d",
     "url": "https://hpdietz.com"
   },
+  "funding": "https://github.com/sponsors/haensl",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/haensl/embed-json/issues"
