@@ -1,3 +1,6 @@
+## 1.2.5
+* [#27: Update dependencies.](https://github.com/haensl/embed-json/issues/27)
+
 ## 1.2.4
 * [#25: Add funding information.](https://github.com/haensl/embed-json/issues/25)
 * Update dependencies.
