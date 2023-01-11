@@ -262,7 +262,7 @@ jobs:
 
   bundle-test-latest:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:current
     steps:
       - init
       - attach_workspace:
