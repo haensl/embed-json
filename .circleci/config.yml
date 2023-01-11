@@ -74,12 +74,11 @@ commands:
     steps:
       - run:
           name: install tree
-          command: sudo apt-get -y install tree
+          command: sudo apt-get update && sudo apt-get -y install tree
       - run:
           name: gather bundle information
           command: |
             npm info embed-json@${VERSION} > ./bundle.info
-            tree -s node_modules/embed-json >> ./bundle.info
       - store_artifacts:
           path: bundle.info
 
@@ -262,7 +261,7 @@ jobs:
 
   bundle-test-latest:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:current
     steps:
       - init
       - attach_workspace:
