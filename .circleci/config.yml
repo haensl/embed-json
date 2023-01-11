@@ -79,7 +79,6 @@ commands:
           name: gather bundle information
           command: |
             npm info embed-json@${VERSION} > ./bundle.info
-            tree -s node_modules/embed-json >> ./bundle.info
       - store_artifacts:
           path: bundle.info
 
