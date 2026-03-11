@@ -129,7 +129,7 @@ workflows:
 jobs:
   lint:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/embed-json
     steps:
       - init
@@ -145,7 +145,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/embed-json
     steps:
       - init
@@ -158,7 +158,7 @@ jobs:
 
   bundle:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/embed-json
     steps:
       - init
@@ -188,7 +188,7 @@ jobs:
 
   bundle-test-lts:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - attach_workspace:
           at: ~/embed-json
@@ -224,7 +224,7 @@ jobs:
 
   bundle-test-min:
     docker:
-      - image: circleci/node:9.0.0
+      - image: cimg/node:9.0.0
     steps:
       - attach_workspace:
           at: ~/embed-json
@@ -297,7 +297,7 @@ jobs:
 
   ensure-versioned-correctly:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/embed-json
     steps:
       - init
@@ -328,7 +328,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/embed-json
     steps:
       - init
@@ -343,7 +343,7 @@ jobs:
 
   package-test-latest:
     docker:
-      - image: circleci/node:latest
+      - image: cimg/node:latest
     steps:
       - init
       - attach_workspace:
@@ -380,7 +380,7 @@ jobs:
 
   package-test-min:
     docker:
-      - image: circleci/node:9.0.0
+      - image: cimg/node:9.0.0
     steps:
       - attach_workspace:
           at: ~/embed-json
@@ -416,7 +416,7 @@ jobs:
 
   package-test-lts:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     steps:
       - attach_workspace:
           at: ~/embed-json
