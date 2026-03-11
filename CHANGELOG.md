@@ -1,3 +1,6 @@
+## 1.2.10
+* [#33: Migrate to trusted publishing.](https://github.com/haensl/embed-json/issues/33)
+
 ## 1.2.9
 * [#33: Migrate to trusted publishing.](https://github.com/haensl/embed-json/issues/33)
 
