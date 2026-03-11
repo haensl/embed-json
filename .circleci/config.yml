@@ -293,8 +293,9 @@ jobs:
           at: ~/embed-json
       - run:
           name: publish node module
-          command: NPM_ID_TOKEN="$(circleci run oidc get --claims '{\"aud\": \"npm:registry.npmjs.org\"}')" npm publish --access public
-
+          command: |
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
+            npm publish
   package-test-latest:
     docker:
       - image: cimg/node:latest
