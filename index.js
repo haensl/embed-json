@@ -12,7 +12,7 @@ const defaults = {
 
 const regexEscape = (str) =>
   str.replace(
-    /([\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/,
+    /([\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/, // eslint-disable-line
     (match, specialChar) => `\\${specialChar}`
   );
 
@@ -57,7 +57,7 @@ module.exports = (html, opts = {}) => {
     options.mimeTypes
       .map((mimeType) => `${regexEscape(mimeType)}`)
       .join('|')
-  })"(.*)src="(.+\.json)"(.*)>(.*)</script>`, 'gm');
+  })"(.*)src="(.+\.json)"(.*)>(.*)</script>`, 'gm'); // eslint-disable-line
 
   return html.replace(
     regex,
